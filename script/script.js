@@ -4,11 +4,15 @@ function clickHandler(event){
     const href = elemento.getAttribute('href');
     const id = href.substring(1);
     for(let i = 0 ; i < contenido.length; i++){
-        contenido[i].style.display = 'none';
+        contenido[i].classList.add('js-content-hidden');
         if (contenido[i].getAttribute('id') == id){
-            contenido[i].style.display = 'block';
+            contenido[i].classList.remove('js-content-hidden');
         }
     }
+    for(let i = 0; i < enlaces.length; i++){
+        enlaces[i].classList.remove('js-active');
+    }
+    event.currentTarget.classList.add('js-active');
 }
 
 const enlaces = document.querySelectorAll('.tabs-tablist-item');
@@ -16,10 +20,12 @@ const enlaces = document.querySelectorAll('.tabs-tablist-item');
 const contenido = document.querySelectorAll('.tabs-content-item');
 
 for(let i = 0 ; i < contenido.length; i++){
-    contenido[i].style.display = 'none';
+    contenido[i].classList.add('js-content-hidden');
 }
 
-contenido[0].style.display = 'block';
+contenido[0].classList.remove('js-content-hidden');
+
+enlaces[0].classList.add('js-active');
 
 for (let i = 0; i < enlaces.length; i++){
     enlaces[i].addEventListener('click', clickHandler);
